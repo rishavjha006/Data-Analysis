@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-md border transition-all duration-300;
+  }
+  
+  .glass-dark {
+    @apply bg-gray-900/80 border-gray-700/50 shadow-xl;
+  }
+  
+  .glass-light {
+    @apply bg-white/80 border-gray-200/50 shadow-xl;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+  }
+  
+  .slide-enter {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  
+  .slide-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  }
+  
+  .slide-exit {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  .slide-exit-active {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 0.4s ease-in, opacity 0.4s ease-in;
+  }
+}
+
+@keyframes pulse-glow {
+  from {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Professional stable backgrounds */
+.bg-dark {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: white;
+}
+
+.bg-light {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  color: #1a202c;
+}
+
+.theme-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text visibility classes */
+.text-primary-dark {
+  @apply text-white;
+}
+
+.text-secondary-dark {
+  @apply text-gray-300;
+}
+
+.text-muted-dark {
+  @apply text-gray-400;
+}
+
+.text-primary-light {
+  @apply text-gray-900;
+}
+
+.text-secondary-light {
+  @apply text-gray-700;
+}
+
+.text-muted-light {
+  @apply text-gray-600;
+}
+
+/* Button styles for both themes */
+.btn-primary-dark {
+  @apply bg-blue-600 hover:bg-blue-700 text-white border-blue-500;
+}
+
+.btn-primary-light {
+  @apply bg-blue-600 hover:bg-blue-700 text-white border-blue-500;
+}
+
+.btn-secondary-dark {
+  @apply bg-gray-700 hover:bg-gray-600 text-white border-gray-600;
+}
+
+.btn-secondary-light {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-900 border-gray-300;
+}
