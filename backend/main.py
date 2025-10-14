@@ -314,44 +314,7 @@ async def clean_data(options: dict):
         "new_shape": {"rows": len(df), "columns": len(df.columns)}
     }
 
-@app.post("/transform-data")
-async def transform_data(options: dict):
-    global current_df
-    if current_df is None:
-        raise HTTPException(status_code=400, detail="No dataset loaded")
-    
-    df = current_df.copy()
-    operations = []
-    
-    # Standardization
-    if options.get('standardize'):
-        numeric_cols = df.select_dtypes(include=['number']).columns
-        scaler = StandardScaler()
-        df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
-        operations.append("Applied standardization to numeric columns")
-    
-    # Normalization
-    if options.get('normalize'):
-        numeric_cols = df.select_dtypes(include=['number']).columns
-        scaler = MinMaxScaler()
-        df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
-        operations.append("Applied min-max normalization")
-    
-    # Log transformation
-    if options.get('log_transform'):
-        columns = options.get('log_columns', [])
-        for col in columns:
-            if col in df.columns and df[col].dtype in ['int64', 'float64']:
-                df[col] = np.log1p(df[col].clip(lower=0))
-                operations.append(f"Applied log transformation to {col}")
-    
-    current_df = df
-    
-    return {
-        "message": "Data transformation completed",
-        "operations": operations,
-        "new_shape": {"rows": len(df), "columns": len(df.columns)}
-    }
+
 
 @app.get("/export/pdf")
 async def export_pdf():
